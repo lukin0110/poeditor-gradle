@@ -1,5 +1,6 @@
 .gradle
 build/
+repo/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -7,3 +8,4 @@ gradle-app.setting
 # Ingnore .idea
 .idea
 poeditor-gradle.iml
+example-project/App/
