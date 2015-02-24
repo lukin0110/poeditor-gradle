@@ -64,23 +64,18 @@ class POEditorPlugin implements Plugin<Project> {
         def projects = project.container(POEditorProject)
         project.extensions.create("poeditor", ConfigExtension)
         project.poeditor.extensions.projects = projects
-        
-        project.task('poeditorExample') << {
-            println 'Example task'
-            println project.poeditor.apiKey
-            println project.poeditor.projects
-        }
-        
-        project.task('poeditorSyncTerms') << {
+
+        project.task('poeditorSyncTerms', ) << {
             println 'Syncing terms'
-            
             for(POEditorProject p : project.poeditor.projects){
-                println "Project: " + p
-                POEditorClient client = new POEditorClient(project.poeditor.apiKey)
-                Path current = Paths.get("");
-                File termsFile = new File(current.toAbsolutePath().toString(), p.terms)
-                UploadDetails details = client.upload(p.projectId, termsFile)
-                println "Sync: " + details
+                if(p.terms != null) {
+                    println "Project: " + p.name
+                    POEditorClient client = new POEditorClient(project.poeditor.apiKey)
+                    Path current = Paths.get("");
+                    File termsFile = new File(current.toAbsolutePath().toString(), p.terms)
+                    UploadDetails details = client.upload(p.projectId, termsFile)
+                    println "Sync: " + details
+                }
             }
         }
         
@@ -92,11 +87,12 @@ class POEditorPlugin implements Plugin<Project> {
             for(POEditorProject p : project.poeditor.projects){
                 println "Project: " + p
                 println "Details: " + client.getProject(p.projectId)
+                FileTypeEnum fte = FileTypeEnum.valueOf(p.type.toUpperCase());
                 
                 for(Map.Entry<String, String> ke : p.map){
                     File exportFile = new File(current.toAbsolutePath().toString(), ke.value)
                     exportFile.getParentFile().mkdirs();
-                    File f = client.export(p.projectId, ke.key, FileTypeEnum.ANDROID_STRINGS, null, exportFile)
+                    File f = client.export(p.projectId, ke.key, fte, null, exportFile)
                     println "File: " + f.getAbsolutePath()
                 }
             }

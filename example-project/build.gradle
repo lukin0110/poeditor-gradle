@@ -15,11 +15,11 @@ buildscript {
 apply plugin: 'poeditor'
 
 poeditor {
-    apikey ''
-    
+    apikey this.properties['poeditor.apiKey']
+
     projects {
         androidAppBE {
-            projectId '29135'
+            projectId this.properties['poeditor.projectId']
             type 'android_strings'
             terms 'App/src/main/res/values/strings.xml'
             trans 'en', 'App/src/main/res/values/strings.xml'
@@ -27,9 +27,8 @@ poeditor {
             trans 'fr', 'App/src/main/res/values-fr/strings.xml'
         }
         androidAppPL {
-            projectId '29135'
+            projectId this.properties['poeditor.projectId']
             type 'android_strings'
-            terms 'App/src/main/res/values/strings.xml'
             trans 'pl', 'App/src/poland/res/values-pl/strings.xml'
         }
     }

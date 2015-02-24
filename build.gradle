@@ -16,7 +16,7 @@ dependencies {
     compile gradleApi()
     compile localGroovy()
     //compile 'org.codehaus.groovy:groovy-all:2.3.6'
-    compile 'be.lukin.poeditor:poeditor-client:0.1.0'
+    compile 'be.lukin.poeditor:poeditor-client:0.1.1'
 }
 
 jar {

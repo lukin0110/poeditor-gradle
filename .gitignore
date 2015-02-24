@@ -9,3 +9,4 @@ gradle-app.setting
 .idea
 poeditor-gradle.iml
 example-project/App/
+example-project/gradle.properties
