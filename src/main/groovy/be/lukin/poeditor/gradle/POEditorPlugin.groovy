@@ -1,6 +1,7 @@
 package be.lukin.poeditor.gradle
 
 import be.lukin.poeditor.FileTypeEnum
+import be.lukin.poeditor.models.UploadDetails
 import org.gradle.api.Plugin
 import org.gradle.api.Project;
 import be.lukin.poeditor.POEditorClient
@@ -10,6 +11,7 @@ import java.nio.file.Paths;
 
 class POEditorProject {
     final String name;
+    String terms;
     String projectId;
     String type;
     Map<String, String> map;
@@ -27,6 +29,10 @@ class POEditorProject {
         this.type = type;
     }
     
+    void terms(String terms){
+        this.terms = terms;
+    }
+    
     void trans(String language, String path){
         this.map.put(language, path);
         
@@ -36,6 +42,7 @@ class POEditorProject {
     public String toString() {
         return "POEditorProject{" +
                 "name='" + name + '\'' +
+                ", terms='" + terms + '\'' +
                 ", projectId='" + projectId + '\'' +
                 ", type='" + type + '\'' +
                 ", map=" + map +
@@ -63,11 +70,24 @@ class POEditorPlugin implements Plugin<Project> {
             println project.poeditor.apiKey
             println project.poeditor.projects
         }
+        
+        project.task('poeditorSyncTerms') << {
+            println 'Syncing terms'
+            
+            for(POEditorProject p : project.poeditor.projects){
+                println "Project: " + p
+                POEditorClient client = new POEditorClient(project.poeditor.apiKey)
+                Path current = Paths.get("");
+                File termsFile = new File(current.toAbsolutePath().toString(), p.terms)
+                UploadDetails details = client.upload(p.projectId, termsFile)
+                println "Sync: " + details
+            }
+        }
+        
         project.task('poeditorDownload') << {
             println 'Downloading translations'
-            Path current = Paths.get("");
-            
             POEditorClient client = new POEditorClient(project.poeditor.apiKey)
+            Path current = Paths.get("");
             
             for(POEditorProject p : project.poeditor.projects){
                 println "Project: " + p

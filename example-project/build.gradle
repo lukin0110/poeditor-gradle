@@ -1,0 +1,36 @@
+/**
+ * Example usage of the gradle plugin. Include the plugin in de `dependencies`.
+ */
+buildscript {
+    repositories {
+        maven { url uri('../build/repo') }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'be.lukin.poeditor:gradle:0.1.0'
+    }
+}
+
+apply plugin: 'poeditor'
+
+poeditor {
+    apikey ''
+    
+    projects {
+        androidAppBE {
+            projectId '29135'
+            type 'android_strings'
+            terms 'App/src/main/res/values/strings.xml'
+            trans 'en', 'App/src/main/res/values/strings.xml'
+            trans 'nl', 'App/src/main/res/values-nl/strings.xml'
+            trans 'fr', 'App/src/main/res/values-fr/strings.xml'
+        }
+        androidAppPL {
+            projectId '29135'
+            type 'android_strings'
+            terms 'App/src/main/res/values/strings.xml'
+            trans 'pl', 'App/src/poland/res/values-pl/strings.xml'
+        }
+    }
+}
