@@ -44,8 +44,3 @@ uploadArchives {
         }
     }
 }
-
-task run (dependsOn: 'classes', type:JavaExec) {
-    main = 'be.lukin.poeditor.gradle.HelloWorld'
-    classpath = sourceSets.main.runtimeClasspath
-}

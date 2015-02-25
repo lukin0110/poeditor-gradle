@@ -69,7 +69,7 @@ class POEditorPlugin implements Plugin<Project> {
             println 'Syncing terms'
             for(POEditorProject p : project.poeditor.projects){
                 if(p.terms != null) {
-                    println "Project: " + p.name
+                    println "\nProject: " + p.name
                     POEditorClient client = new POEditorClient(project.poeditor.apiKey)
                     Path current = Paths.get("");
                     File termsFile = new File(current.toAbsolutePath().toString(), p.terms)
@@ -85,15 +85,16 @@ class POEditorPlugin implements Plugin<Project> {
             Path current = Paths.get("");
             
             for(POEditorProject p : project.poeditor.projects){
-                println "Project: " + p
-                println "Details: " + client.getProject(p.projectId)
+                def details = client.getProject(p.projectId)
+                println "\nProject: " + details.name + " (id:" + details.id + ", type:" + p.type + ")"
+                //.p.name + " (" + p.projectId + ")"
                 FileTypeEnum fte = FileTypeEnum.valueOf(p.type.toUpperCase());
-                
+
                 for(Map.Entry<String, String> ke : p.map){
                     File exportFile = new File(current.toAbsolutePath().toString(), ke.value)
                     exportFile.getParentFile().mkdirs();
                     File f = client.export(p.projectId, ke.key, fte, null, exportFile)
-                    println "File: " + f.getAbsolutePath()
+                    println " - Trans " + ke.key + ": " + ke.value
                 }
             }
         }
