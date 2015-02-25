@@ -10,3 +10,5 @@ gradle-app.setting
 poeditor-gradle.iml
 example-project/App/
 example-project/gradle.properties
+
+gradle.properties

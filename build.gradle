@@ -1,11 +1,16 @@
 apply plugin: 'java'
 apply plugin: 'groovy'
+apply plugin: 'signing'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
+// Artifact settings
 group = 'be.lukin.poeditor'
 version='0.1.0'
 archivesBaseName = 'gradle'
+
+def _name = 'Gradle Plugin for POEditor'
+def _description = 'Gradle plugin to sync translations with POEditor'
 
 repositories {
     mavenLocal()
@@ -39,8 +44,59 @@ publishing {
 
 uploadArchives {
     repositories {
+        /*
         mavenDeployer {
+            
+        }
+        */
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
             repository(url: uri('./build/repo'))
+            
+            /*
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }*/
+
+            pom.project {
+                name _name
+                packaging 'jar'
+                artifactId archivesBaseName
+                description _description
+                url 'https://github.com/lukin0110/poeditor-gradle/'
+                inceptionYear '2015'
+
+                scm {
+                    url 'https://github.com/lukin0110/poeditor-gradle/'
+                    connection 'scm:https://github.com/lukin0110/poeditor-gradle.git'
+                    developerConnection 'scm:git://github.com/lukin0110/poeditor-gradle.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'lukin0110'
+                        name 'Maarten Huijsmans'
+                        email 'maarten@lukin.be'
+                    }
+                }
+                
+                issueManagement {
+                    system 'GitHub issues'
+                    url 'https://github.com/lukin0110/poeditor-gradle/issues'
+                }
+            }
         }
     }
 }

@@ -31,3 +31,25 @@ Sync terms:
 ```
 gradle poeditorSyncTerms
 ```
+
+Configuration
+=============
+
+Example configuration:
+
+```groovy
+poeditor {
+    apikey 'apikey here'
+
+    projects {
+        androidApp {
+            projectId 'project id here'
+            type 'android_strings'
+            terms 'App/src/main/res/values/strings.xml'
+            trans 'en', 'App/src/main/res/values/strings.xml'
+            trans 'nl', 'App/src/main/res/values-nl/strings.xml'
+            trans 'fr', 'App/src/main/res/values-fr/strings.xml'
+        }
+    }
+}
+```
