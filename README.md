@@ -2,7 +2,8 @@ poeditor-gradle
 ===============
 [![Build Status](https://travis-ci.org/lukin0110/poeditor-gradle.svg)](https://travis-ci.org/lukin0110/poeditor-gradle)
 
-Plugin for Gradle to download translations from [POEditor API](https://poeditor.com/).
+Plugin for Gradle to manage translations from [POEditor API](https://poeditor.com/). Download new translations and 
+upload new terms.
 
 1. Install
 ----------
@@ -27,7 +28,7 @@ buildscript {
 2. Configure
 -------------
 Add configuration about your POEditor project to the `gradle.build` file. You need an api key and project id from 
-POEDitor.
+POEditor.
 
 Example configuration:
 
@@ -48,8 +49,8 @@ Now you're all set to manage your translations.
 
 3. Usage
 --------
-Initialize your project. After your have created your translation project on POEditor you can can initialize your 
-project based on your configuration.
+After your have created your translation project on POEditor you can can initialize your project based on your c
+onfiguration.
 
 Initialize:
 ```

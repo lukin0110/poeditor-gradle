@@ -44,9 +44,11 @@ artifacts {
 }
 
 signing {
-    sign configurations.archives
+    if(this.hasProperty('remote')) {
+        sign configurations.archives
+    }
 }
-
+    
 publishing {
     publications {
         maven(MavenPublication) {
@@ -65,10 +67,10 @@ def _ossrhPassword = this.properties['ossrhPassword']
 uploadArchives {
     repositories {
         mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
             
             //use: gradle uploadArchives -Premote
             if(this.hasProperty('remote')){
+                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
                 repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
                     authentication(userName: _ossrhUsername, password: _ossrhPassword)
                 }
