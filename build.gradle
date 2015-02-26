@@ -59,6 +59,9 @@ publishing {
     }
 }
 
+def _ossrhUsername = this.properties['ossrhUsername']
+def _ossrhPassword = this.properties['ossrhPassword']
+
 uploadArchives {
     repositories {
         mavenDeployer {
@@ -67,14 +70,14 @@ uploadArchives {
             //use: gradle uploadArchives -Premote
             if(this.hasProperty('remote')){
                 repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                    authentication(userName: ossrhUsername, password: ossrhPassword)
+                    authentication(userName: _ossrhUsername, password: _ossrhPassword)
                 }
             } else {
                 repository(url: uri('./build/repo'))
             }
 
             snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
+                authentication(userName: _ossrhUsername, password: _ossrhPassword)
             }
 
             pom.project {
