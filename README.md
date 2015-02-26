@@ -4,24 +4,59 @@ poeditor-gradle
 
 Plugin for Gradle to download translations from [POEditor API](https://poeditor.com/).
 
-Download
---------
+1. Install
+----------
+Add the following line of code to your `gradle.build` file in the `dependencies` section.
 
-Grab via maven:
-```xml
-<dependency>
-  <groupId>be.lukin.poeditor</groupId>
-  <artifactId>gradle</artifactId>
-  <version>0.2.0</version>
-</dependency>
-```
-or gradle:
 ```groovy
-compile 'be.lukin.poeditor:gradle:0.2.0'
+classpath 'be.lukin.poeditor:gradle:0.2.0'
 ```
 
-Usage
------
+For example:
+```
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'be.lukin.poeditor:gradle:0.2.0'
+    }
+}
+```
+
+2. Configure
+-------------
+Add configuration about your POEditor project to the `gradle.build` file. You need an api key and project id from 
+POEDitor.
+
+Example configuration:
+
+```groovy
+poeditor {
+    apikey 'your api key here'
+    projectId 'your project id here'
+    type 'android_strings'x
+
+    terms 'App/src/main/res/values/strings.xml'
+    trans 'en', 'App/src/main/res/values/strings.xml'
+    trans 'nl', 'App/src/main/res/values-nl/strings.xml'
+    trans 'fr', 'App/src/main/res/values-fr/strings.xml'
+}
+```
+
+Now you're all set to manage your translations.
+
+3. Usage
+--------
+Initialize your project. After your have created your translation project on POEditor you can can initialize your 
+project based on your configuration.
+
+Initialize:
+```
+gradle poeditorInit
+```
+This will create terms and add languages to your project.
+
 
 Download translations:
 ```
@@ -33,20 +68,3 @@ Add terms:
 gradle poeditorPushTerms
 ```
 
-Configuration
-=============
-
-Example configuration:
-
-```groovy
-poeditor {
-    apikey 'your api key here'
-    projectId 'your project id here'
-    type 'android_strings'
-
-    terms 'App/src/main/res/values/strings.xml'
-    trans 'en', 'App/src/main/res/values/strings.xml'
-    trans 'nl', 'App/src/main/res/values-nl/strings.xml'
-    trans 'fr', 'App/src/main/res/values-fr/strings.xml'
-}
-```
