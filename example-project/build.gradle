@@ -8,7 +8,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'be.lukin.poeditor:gradle:0.1.0'
+        classpath 'be.lukin.poeditor:gradle:0.2.0'
     }
 }
 
@@ -16,20 +16,11 @@ apply plugin: 'poeditor'
 
 poeditor {
     apikey this.properties['poeditor.apiKey']
-
-    projects {
-        androidAppBE {
-            projectId this.properties['poeditor.projectId']
-            type 'android_strings'
-            terms 'App/src/main/res/values/strings.xml'
-            trans 'en', 'App/src/main/res/values/strings.xml'
-            trans 'nl', 'App/src/main/res/values-nl/strings.xml'
-            trans 'fr', 'App/src/main/res/values-fr/strings.xml'
-        }
-        androidAppPL {
-            projectId this.properties['poeditor.projectId']
-            type 'android_strings'
-            trans 'pl', 'App/src/poland/res/values-pl/strings.xml'
-        }
-    }
+    projectId this.properties['poeditor.projectId']
+    type 'android_strings'
+    
+    terms 'App/src/main/res/values/strings.xml'
+    trans 'en', 'App/src/main/res/values/strings.xml'
+    trans 'nl', 'App/src/main/res/values-nl/strings.xml'
+    trans 'fr', 'App/src/main/res/values-fr/strings.xml'
 }
