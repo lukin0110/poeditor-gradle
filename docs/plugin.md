@@ -8,3 +8,9 @@ Publish to local repo:
 ```
 gradle publishToMavenLocal
 ```
+
+Run tests
+---------
+```
+gradle test
+```

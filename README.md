@@ -11,12 +11,12 @@ Grab via maven:
 <dependency>
   <groupId>be.lukin.poeditor</groupId>
   <artifactId>gradle</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
 </dependency>
 ```
 or gradle:
 ```groovy
-compile 'be.lukin.poeditor:gradle:0.1.0'
+compile 'be.lukin.poeditor:gradle:0.2.0'
 ```
 
 Usage
@@ -24,12 +24,12 @@ Usage
 
 Download translations:
 ```
-gradle poeditorDownload
+gradle poeditorPull
 ```
 
-Sync terms:
+Add terms:
 ```
-gradle poeditorSyncTerms
+gradle poeditorPushTerms
 ```
 
 Configuration
@@ -39,17 +39,13 @@ Example configuration:
 
 ```groovy
 poeditor {
-    apikey 'apikey here'
+    apikey 'your api key here'
+    projectId 'your project id here'
+    type 'android_strings'
 
-    projects {
-        androidApp {
-            projectId 'project id here'
-            type 'android_strings'
-            terms 'App/src/main/res/values/strings.xml'
-            trans 'en', 'App/src/main/res/values/strings.xml'
-            trans 'nl', 'App/src/main/res/values-nl/strings.xml'
-            trans 'fr', 'App/src/main/res/values-fr/strings.xml'
-        }
-    }
+    terms 'App/src/main/res/values/strings.xml'
+    trans 'en', 'App/src/main/res/values/strings.xml'
+    trans 'nl', 'App/src/main/res/values-nl/strings.xml'
+    trans 'fr', 'App/src/main/res/values-fr/strings.xml'
 }
 ```
