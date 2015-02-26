@@ -14,3 +14,5 @@ Run tests
 ```
 gradle test
 ```
+
+Using travis: http://docs.travis-ci.com/user/languages/groovy/

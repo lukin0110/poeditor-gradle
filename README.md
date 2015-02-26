@@ -1,5 +1,6 @@
 poeditor-gradle
 ===============
+[![Build Status](https://travis-ci.org/lukin0110/poeditor-gradle.svg)](https://travis-ci.org/lukin0110/poeditor-gradle)
 
 Plugin for Gradle to download translations from [POEditor API](https://poeditor.com/).
 
