@@ -8,7 +8,10 @@ gradle-app.setting
 # Ingnore .idea
 .idea
 poeditor-gradle.iml
-example-project/App/
-example-project/gradle.properties
 
 gradle.properties
+
+# Example folder
+example-project/App/
+example-project/src/
+example-project/gradle.properties

@@ -19,7 +19,7 @@ Include the plugin:
 apply plugin: 'poeditor'
 ```
 
-Full example: [example project](https://github.com/lukin0110/poeditor-gradle/blob/master/example-project/build.gradle)
+The plugin requires at minimum Java 7 and Gradle 2.x.
 
 2. Configure
 -------------
@@ -40,6 +40,10 @@ poeditor {
     trans 'fr', 'App/src/main/res/values-fr/strings.xml'
 }
 ```
+
+Parameter    | Description
+------------ | --------------------
+type         | file format: po, pot, mo, xls, apple_strings, xliff, android_strings, resx, resw, properties, json
 
 Now you're all set to manage your translations.
 
@@ -65,3 +69,4 @@ Add terms:
 gradle poeditorPushTerms
 ```
 
+A few example configurations can be found in the [example projects](https://github.com/lukin0110/poeditor-gradle/blob/master/example-project/) folder.
