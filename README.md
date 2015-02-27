@@ -2,7 +2,7 @@ poeditor-gradle
 ===============
 [![Build Status](https://travis-ci.org/lukin0110/poeditor-gradle.svg)](https://travis-ci.org/lukin0110/poeditor-gradle)
 
-Gradle plugin to manage translations easily within a [POEditor](https://poeditor.com/) project. The plugin enables you 
+Gradle plugin to manage translations easily within a [POEditor][1] project. The plugin enables you
 to include downloading and uploading of translations in your Gradle build file.
 
 1. Install
@@ -69,4 +69,27 @@ Add terms:
 gradle poeditorPushTerms
 ```
 
-A few example configurations can be found in the [example projects](https://github.com/lukin0110/poeditor-gradle/blob/master/example-project/) folder.
+A few example configurations can be found in the [example projects][3] folder.
+
+License
+=======
+
+    Copyright 2015 Maarten Huijsmans
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+
+ [1]: https://poeditor.com/
+ [2]: http://search.maven.org/remotecontent?filepath=be/lukin/poeditor/poeditor-client/0.1.1/poeditor-client-0.1.1.jar
+ [3]: https://github.com/lukin0110/poeditor-gradle/blob/master/example-project/
+ [snap]: https://oss.sonatype.org/content/repositories/snapshots/
