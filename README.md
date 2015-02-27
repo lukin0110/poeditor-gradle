@@ -2,8 +2,8 @@ poeditor-gradle
 ===============
 [![Build Status](https://travis-ci.org/lukin0110/poeditor-gradle.svg)](https://travis-ci.org/lukin0110/poeditor-gradle)
 
-Plugin for Gradle to manage translations from [POEditor API](https://poeditor.com/). Download new translations and 
-upload new terms.
+Gradle plugin to manage translations easily within a [POEditor](https://poeditor.com/) project. The plugin enables you 
+to include downloading and uploading of translations in your Gradle build file.
 
 1. Install
 ----------
@@ -32,7 +32,7 @@ Example configuration:
 poeditor {
     apikey 'your api key here'
     projectId 'your project id here'
-    type 'android_strings'x
+    type 'android_strings'
 
     terms 'App/src/main/res/values/strings.xml'
     trans 'en', 'App/src/main/res/values/strings.xml'
