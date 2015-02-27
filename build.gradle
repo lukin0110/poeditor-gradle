@@ -61,6 +61,7 @@ publishing {
     }
 }
 
+// Username & password for Sonatype, stored in gradle.properties
 def _ossrhUsername = this.properties['ossrhUsername']
 def _ossrhPassword = this.properties['ossrhPassword']
 

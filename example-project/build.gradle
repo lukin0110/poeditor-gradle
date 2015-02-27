@@ -1,5 +1,7 @@
 /**
- * Example usage of the gradle plugin. Include the plugin in de `dependencies`.
+ * Example usage of the gradle plugin.
+ * 
+ * `poeditor.apiKey` & `poeditor.projectId` are store in the gradle.properties file which is not in git
  */
 buildscript {
     repositories {

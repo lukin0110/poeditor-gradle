@@ -7,23 +7,19 @@ upload new terms.
 
 1. Install
 ----------
-Add the following line of code to your `gradle.build` file in the `dependencies` section.
+Add the following 2 lines of code to your `gradle.build` file. 
 
+In the `dependencies` section:
 ```groovy
 classpath 'be.lukin.poeditor:gradle:0.2.0'
 ```
 
-For example:
+Include the plugin:
+```groovy
+apply plugin: 'poeditor'
 ```
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'be.lukin.poeditor:gradle:0.2.0'
-    }
-}
-```
+
+Full example: [example project](https://github.com/lukin0110/poeditor-gradle/blob/master/example-project/build.gradle)
 
 2. Configure
 -------------
