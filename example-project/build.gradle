@@ -10,7 +10,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'be.lukin.poeditor:gradle:0.2.0'
+        classpath 'be.lukin.poeditor:gradle:0.3.0'
     }
 }
 
@@ -20,6 +20,7 @@ poeditor {
     apikey this.properties['poeditor.apiKey']
     projectId this.properties['poeditor.projectId']
     type 'android_strings'
+    tagsNew "2.2", "vt"
     
     terms 'App/src/main/res/values/strings.xml'
     trans 'en', 'App/src/main/res/values/strings.xml'

@@ -5,13 +5,15 @@ poeditor-gradle
 Gradle plugin to manage translations easily within a [POEditor][1] project. The plugin enables you
 to include downloading and uploading of translations in your Gradle build file.
 
+This gradle plugin depends on [poeditor-java][4], a java client for the POEditor API.
+
 1. Install
 ----------
 Add the following 2 lines of code to your `gradle.build` file. 
 
 In the `dependencies` section:
 ```groovy
-classpath 'be.lukin.poeditor:gradle:0.2.0'
+classpath 'be.lukin.poeditor:gradle:0.3.0'
 ```
 
 Include the plugin:
@@ -33,6 +35,7 @@ poeditor {
     apikey 'your api key here'
     projectId 'your project id here'
     type 'android_strings'
+    tagsNew '1.0'
 
     terms 'App/src/main/res/values/strings.xml'
     trans 'en', 'App/src/main/res/values/strings.xml'
@@ -90,6 +93,7 @@ License
 
 
  [1]: https://poeditor.com/
- [2]: http://search.maven.org/remotecontent?filepath=be/lukin/poeditor/poeditor-client/0.1.1/poeditor-client-0.1.1.jar
+ [2]: http://search.maven.org/remotecontent?filepath=be/lukin/poeditor/poeditor-client/0.3.1/poeditor-client-0.3.1.jar
  [3]: https://github.com/lukin0110/poeditor-gradle/blob/master/example-project/
  [snap]: https://oss.sonatype.org/content/repositories/snapshots/
+ [4]: https://github.com/lukin0110/poeditor-java

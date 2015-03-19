@@ -1,8 +1,5 @@
 package be.lukin.poeditor.gradle
 
-import be.lukin.poeditor.gradle.tasks.InitTask
-import be.lukin.poeditor.gradle.tasks.PullTask
-import be.lukin.poeditor.gradle.tasks.PushTermsTask
 import org.junit.Test
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.api.Project
@@ -17,18 +14,21 @@ class PluginTest {
         project.apply plugin: 'poeditor'
         
         def container = project.tasks
-        assertEquals(3, container.size())
+        assertEquals(4, container.size())
         
         // Random task
         assertTrue(container.findByName('poeditor42') == null)
         
         assertTrue(container.findByName('poeditorInit') != null)
-        assertTrue(project.tasks.poeditorInit instanceof InitTask)
+        assertTrue(project.tasks.poeditorInit instanceof InitTaskGradle)
         
         assertTrue(container.findByName('poeditorPushTerms') != null)
-        assertTrue(project.tasks.poeditorPushTerms instanceof PushTermsTask)
-        
+        assertTrue(project.tasks.poeditorPushTerms instanceof PushTermsTaskGradle)
+
         assertTrue(container.findByName('poeditorPull') != null)
-        assertTrue(project.tasks.poeditorPull instanceof PullTask)
+        assertTrue(project.tasks.poeditorPull instanceof PullTaskGradle)
+
+        assertTrue(container.findByName('poeditorStatus') != null)
+        assertTrue(project.tasks.poeditorStatus instanceof StatusTaskGradle)
     }
 }

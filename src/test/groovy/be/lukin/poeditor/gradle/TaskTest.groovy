@@ -1,8 +1,5 @@
 package be.lukin.poeditor.gradle
 
-import be.lukin.poeditor.gradle.tasks.InitTask
-import be.lukin.poeditor.gradle.tasks.PullTask
-import be.lukin.poeditor.gradle.tasks.PushTermsTask
 import org.junit.Test
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.api.Project
@@ -13,13 +10,16 @@ class TaskTest {
     public void canAddTaskToProject() {
         Project project = ProjectBuilder.builder().build()
         
-        def task1 = project.task('poeditorInit', type: InitTask)
-        assertTrue(task1 instanceof InitTask)
+        def task1 = project.task('poeditorInit', type: InitTaskGradle)
+        assertTrue(task1 instanceof InitTaskGradle)
         
-        def task2 = project.task('poeditorPushTerms', type: PushTermsTask)
-        assertTrue(task2 instanceof PushTermsTask)
+        def task2 = project.task('poeditorPushTerms', type: PushTermsTaskGradle)
+        assertTrue(task2 instanceof PushTermsTaskGradle)
 
-        def task3 = project.task('poeditorPull', type: PullTask)
-        assertTrue(task3 instanceof PullTask)
+        def task3 = project.task('poeditorPull', type: PullTaskGradle)
+        assertTrue(task3 instanceof PullTaskGradle)
+
+        def task4 = project.task('poeditorStatus', type: StatusTaskGradle)
+        assertTrue(task4 instanceof StatusTaskGradle)
     }
 }
