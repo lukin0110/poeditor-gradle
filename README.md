@@ -13,7 +13,7 @@ Add the following 2 lines of code to your `gradle.build` file.
 
 In the `dependencies` section:
 ```groovy
-classpath 'be.lukin.poeditor:gradle:0.3.0'
+classpath 'be.lukin.poeditor:gradle:0.3.2'
 ```
 
 Include the plugin:
@@ -67,6 +67,11 @@ Download translations:
 gradle poeditorPull
 ```
 
+Upload translations:
+```
+gradle poeditorPush
+```
+
 Add terms:
 ```
 gradle poeditorPushTerms
@@ -93,7 +98,7 @@ License
 
 
  [1]: https://poeditor.com/
- [2]: http://search.maven.org/remotecontent?filepath=be/lukin/poeditor/poeditor-client/0.3.1/poeditor-client-0.3.1.jar
+ [2]: http://search.maven.org/remotecontent?filepath=be/lukin/poeditor/poeditor-client/0.3.2/poeditor-client-0.3.2.jar
  [3]: https://github.com/lukin0110/poeditor-gradle/blob/master/example-project/
  [snap]: https://oss.sonatype.org/content/repositories/snapshots/
  [4]: https://github.com/lukin0110/poeditor-java
