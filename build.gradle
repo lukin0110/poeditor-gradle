@@ -15,7 +15,7 @@ targetCompatibility = 1.7
 
 // Artifact settings
 group = 'be.lukin.poeditor'
-version='0.3.1'
+version='0.3.2'
 archivesBaseName = 'gradle'
 
 def _name = 'Gradle Plugin for POEditor'
@@ -29,7 +29,7 @@ repositories {
 dependencies {
     compile gradleApi()
     compile localGroovy()
-    compile 'be.lukin.poeditor:poeditor-client:0.3.2'
+    compile 'be.lukin.poeditor:poeditor-client:0.3.3'
 }
 
 jar {
@@ -129,3 +129,11 @@ uploadArchives {
         }
     }
 }
+
+// Force to download dependencies
+// http://stackoverflow.com/questions/21814652/how-to-download-dependencies-in-gradle
+task getDeps(type: Copy) {
+    from sourceSets.main.runtimeClasspath
+    into 'runtime/'
+}
+
