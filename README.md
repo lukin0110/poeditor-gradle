@@ -72,6 +72,16 @@ Upload translations:
 gradle poeditorPush
 ```
 
+Argument        | Description
+--------------- | ----------------------------------------------------------------------
+languages       | specify the languages that you want to upload, by default everything is uploaded
+override        | force to override the translation on POEditor
+
+Example:
+```
+gradle poeditorPush -Planguages=nl,fr -Poverride=true
+```
+
 Add terms:
 ```
 gradle poeditorPushTerms
