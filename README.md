@@ -63,18 +63,18 @@ Now you're all set to manage your translations.
 After your have created your translation project on POEditor you can can initialize your project based on your c
 onfiguration.
 
-### 3.1 Initialize
+### Initialize
 ```
 gradle poeditorInit
 ```
 This will create terms and add languages to your project.
 
-### 3.2 Download translations
+### Download translations
 ```
 gradle poeditorPull
 ```
 
-### 3.3 Upload translations
+### Upload translations
 ```
 gradle poeditorPush
 ```
@@ -89,7 +89,7 @@ Example:
 gradle poeditorPush -Planguages=nl,fr -Poverride=true
 ```
 
-### 3.4 Add terms
+### Add terms
 ```
 gradle poeditorPushTerms
 ```
