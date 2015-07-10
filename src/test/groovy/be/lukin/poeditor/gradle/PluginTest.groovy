@@ -14,13 +14,16 @@ class PluginTest {
         project.apply plugin: 'poeditor'
         
         def container = project.tasks
-        assertEquals(4, container.size())
+        assertEquals(5, container.size())
         
         // Random task
         assertTrue(container.findByName('poeditor42') == null)
         
         assertTrue(container.findByName('poeditorInit') != null)
         assertTrue(project.tasks.poeditorInit instanceof InitTaskGradle)
+        
+        assertTrue(container.findByName('poeditorPush') != null)
+        assertTrue(project.tasks.poeditorPush instanceof PushTaskGradle)
         
         assertTrue(container.findByName('poeditorPushTerms') != null)
         assertTrue(project.tasks.poeditorPushTerms instanceof PushTermsTaskGradle)
