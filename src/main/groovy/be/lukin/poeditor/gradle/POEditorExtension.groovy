@@ -8,7 +8,8 @@ class POEditorExtension {
     String terms;
     String projectId;
     String type;
-    Map<String, String> map;
+    Map<String, String> translations;
+    Map<String, String> filters;
     String[] tagsNew;
     
     POEditorExtension(){
@@ -17,13 +18,13 @@ class POEditorExtension {
 
     POEditorExtension(String name){
         this.name = name;
-        this.map = new HashMap<>();
+        this.translations = new HashMap<>();
+        this.filters = new HashMap<>();
     }
     
     void apikey(String apiKey){
         this.apiKey = apiKey
     }
-
 
     void projectId(String projectId){
         this.projectId = projectId;
@@ -38,7 +39,11 @@ class POEditorExtension {
     }
 
     void trans(String language, String path){
-        this.map.put(language, path);
+        this.translations.put(language, path);
+    }
+    
+    void filters(String language, String filters){
+        this.filters.put(language, filters);
     }
 
     void tagsNew(String[] tagsNew) {
@@ -46,7 +51,7 @@ class POEditorExtension {
     }
 
     public Config toConfig(){
-        Config config = new Config(apiKey, projectId, type, terms, map, null, tagsNew, null, null);
+        Config config = new Config(apiKey, projectId, type, terms, translations, filters, null, tagsNew, null, null);
         return config;
     }
 
@@ -58,7 +63,9 @@ class POEditorExtension {
                 ", terms='" + terms + '\'' +
                 ", projectId='" + projectId + '\'' +
                 ", type='" + type + '\'' +
-                ", map=" + map +
+                ", translations=" + translations +
+                ", filters=" + filters +
+                ", tagsNew=" + Arrays.toString(tagsNew) +
                 '}';
     }
 }
