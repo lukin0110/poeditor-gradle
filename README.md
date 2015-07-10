@@ -13,7 +13,7 @@ Add the following 2 lines of code to your `gradle.build` file.
 
 In the `dependencies` section:
 ```groovy
-classpath 'be.lukin.poeditor:gradle:0.3.2'
+classpath 'be.lukin.poeditor:gradle:0.3.3'
 ```
 
 Include the plugin:
@@ -41,12 +41,20 @@ poeditor {
     trans 'en', 'App/src/main/res/values/strings.xml'
     trans 'nl', 'App/src/main/res/values-nl/strings.xml'
     trans 'fr', 'App/src/main/res/values-fr/strings.xml'
+    
+    filters 'nl', 'translated'
+    filters 'fr', 'translated, automatic'
 }
 ```
 
 Parameter    | Description
 ------------ | --------------------
+apiKey       | api key to access the api, can be obtained in your [Account][account]
+projectId    | id of the project on POEditor
 type         | file format: po, pot, mo, xls, apple_strings, xliff, android_strings, resx, resw, properties, json
+terms        | point to the file that contains all the terms, probably this is your default language
+trans        | receives 2 parameters: language code & file path of a translation
+filters      | receives 2 parameters: language code & comma separated list of filters. Check the [API Reference][reference] for all available filters 
 
 Now you're all set to manage your translations.
 
@@ -55,19 +63,18 @@ Now you're all set to manage your translations.
 After your have created your translation project on POEditor you can can initialize your project based on your c
 onfiguration.
 
-Initialize:
+### 3.1 Initialize
 ```
 gradle poeditorInit
 ```
 This will create terms and add languages to your project.
 
-
-Download translations:
+### 3.2 Download translations
 ```
 gradle poeditorPull
 ```
 
-Upload translations:
+### 3.3 Upload translations
 ```
 gradle poeditorPush
 ```
@@ -82,7 +89,7 @@ Example:
 gradle poeditorPush -Planguages=nl,fr -Poverride=true
 ```
 
-Add terms:
+### 3.4 Add terms
 ```
 gradle poeditorPushTerms
 ```
@@ -108,7 +115,10 @@ License
 
 
  [1]: https://poeditor.com/
- [2]: http://search.maven.org/remotecontent?filepath=be/lukin/poeditor/poeditor-client/0.3.2/poeditor-client-0.3.2.jar
+ [2]: http://search.maven.org/remotecontent?filepath=be/lukin/poeditor/poeditor-client/0.3.3/poeditor-client-0.3.3.jar
  [3]: https://github.com/lukin0110/poeditor-gradle/blob/master/example-project/
  [snap]: https://oss.sonatype.org/content/repositories/snapshots/
  [4]: https://github.com/lukin0110/poeditor-java
+ [reference]:   https://poeditor.com/api_reference/
+ [account]:     https://poeditor.com/account/api
+ 
