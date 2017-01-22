@@ -20,27 +20,85 @@ class POEditorPlugin implements Plugin<Project> {
 
         // Define extension
         project.extensions.create("poeditor", POEditorExtension)
-        
+
+        def android = project.extensions.findByName("android")
+
         // Define tasks
-        project.task("poeditorInit", 
+        project.task("poeditorInit",
                 type: InitTaskGradle,
                 group: GROUP,
                 description: "Initialization: create terms & languages")
-        
-        project.task("poeditorPush", 
+        if (android != null) {
+            android.productFlavors.
+                    all { flavor -> project.task("poeditorInit${flavor.name}",
+                            type: InitTaskGradle,
+                            group: GROUP,
+                            description: "Initialization: create terms & languages for ${flavor.name}") {
+                            doFirst() {
+                                project.poeditor {
+                                    variant flavor.name
+                                }
+                            }
+                        }
+                    }
+        }
+
+        project.task("poeditorPush",
                 type: PushTaskGradle,
                 group: GROUP,
                 description: "Upload translations")
+        if (android != null) {
+            android.productFlavors.
+                    all { flavor -> project.task("poeditorPush${flavor.name}",
+                            type: PushTaskGradle,
+                            group: GROUP,
+                            description: "Upload translations for ${flavor.name}") {
+                        doFirst() {
+                            project.poeditor {
+                                variant flavor.name
+                            }
+                        }
+                      }
+                    }
+        }
         
         project.task("poeditorPushTerms",
                 type: PushTermsTaskGradle,
                 group: GROUP, 
                 description: "Upload terms")
+        if (android != null) {
+            android.productFlavors.
+                    all { flavor -> project.task("poeditorPushTerms${flavor.name}",
+                            type: PushTermsTaskGradle,
+                            group: GROUP,
+                            description: "Upload terms for ${flavor.name}") {
+                        doFirst() {
+                            project.poeditor {
+                                variant flavor.name
+                            }
+                        }
+                      }
+                    }
+        }
         
         project.task("poeditorPull",
                 type: PullTaskGradle,
                 group: GROUP, 
                 description: "Download translations")
+        if (android != null) {
+            android.productFlavors.
+                    all { flavor -> project.task("poeditorPull${flavor.name}",
+                            type: PullTaskGradle,
+                            group: GROUP,
+                            description: "Download translations for ${flavor.name}") {
+                        doFirst() {
+                            project.poeditor {
+                                variant flavor.name
+                            }
+                        }
+                      }
+                    }
+        }
         
         project.task("poeditorStatus",
                 type: StatusTaskGradle,
