@@ -1,6 +1,6 @@
 package be.lukin.poeditor.gradle
 
-import be.lukin.poeditor.tasks.PullTask;
+import be.lukin.poeditor.tasks.PullTaskWithEmptyFileFix;
 import be.lukin.poeditor.tasks.PushTask;
 import be.lukin.poeditor.tasks.PushTermsTask;
 import be.lukin.poeditor.tasks.InitTask;
@@ -121,7 +121,7 @@ class PullTaskGradle extends DefaultTask {
     def initialize() {
         def project = this.getProject();
         POEditorExtension extension = project.poeditor;
-        new PullTask().configure(extension.toConfig()).handle();
+        new PullTaskWithEmptyFileFix().configure(extension.toConfig()).handle();
     }
 }
 
