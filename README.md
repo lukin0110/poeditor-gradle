@@ -1,6 +1,5 @@
 poeditor-gradle
 ===============
-[![Build Status](https://travis-ci.org/lukin0110/poeditor-gradle.svg)](https://travis-ci.org/lukin0110/poeditor-gradle)
 
 Gradle plugin to manage translations easily within a [POEditor][1] project. The plugin enables you
 to include downloading and uploading of translations in your Gradle build file.
@@ -11,9 +10,16 @@ This gradle plugin depends on [poeditor-java][4], a java client for the POEditor
 ----------
 Add the following 2 lines of code to your `gradle.build` file. 
 
-In the `dependencies` section:
+In the `buildscript dependencies` section:
+
 ```groovy
-classpath 'be.lukin.poeditor:gradle:0.3.3'
+     maven { url = 'https://jitpack.io' }
+```
+
+In the `dependencies` section:
+
+```groovy
+classpath "com.github.vimn-north:poeditor-gradle:-SNAPSHOT"
 ```
 
 Include the plugin:
@@ -23,8 +29,8 @@ apply plugin: 'poeditor'
 
 The plugin requires at minimum Java 7 and Gradle 2.x.
 
-2. Configure
--------------
+2. Configure (without flavors)
+------------------------------
 Add configuration about your POEditor project to the `gradle.build` file. You need an api key and project id from 
 POEditor.
 
@@ -57,6 +63,43 @@ trans        | receives 2 parameters: language code & file path of a translation
 filters      | receives 2 parameters: language code & comma separated list of filters. Check the [API Reference][reference] for all available filters 
 
 Now you're all set to manage your translations.
+
+
+2. Configure (with flavors)
+---------------------------
+If you need flavor depending values, the setup is similar
+
+configure the shared values:
+
+```groovy
+poeditor {
+    apikey 'your api key here'
+    projectId 'your project id here'
+    type 'android_strings'
+    tagsNew '1.0'
+}
+```
+
+and keep the translation values in the flavors:
+
+    productFlavors {
+        'myflavor' {
+            ...
+            project.poeditor {
+                    variant 'myflavor'
+                    projectId 'your project id here'
+                    terms 'App/src/main/res/values/strings.xml'
+                    trans 'en', 'App/src/myflavor/res/values/strings.xml'
+                    trans 'nl', 'App/src/myflavor/res/values-nl/strings.xml'
+                    trans 'fr', 'App/src/myflavor/res/values-fr/strings.xml'
+
+                    filters 'nl', 'translated'
+                    filters 'fr', 'translated, automatic'
+            }
+       }
+    }
+
+
 
 3. Usage
 --------
@@ -95,6 +138,15 @@ gradle poeditorPushTerms
 ```
 
 A few example configurations can be found in the [example projects][3] folder.
+
+
+For flavors use the same tasks but add the flavor name:
+
+Example:
+```
+gradle poeditorPushmyflavor
+```
+
 
 License
 =======
