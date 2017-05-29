@@ -3,31 +3,50 @@ package be.lukin.poeditor.gradle
 import be.lukin.poeditor.Config
 
 class POEditorExtension {
+
+    private static final String DEFAULT_VARIANT = ""
+
+    static class POEditorConfiguration {
+        String terms;
+        String projectId;
+        Map<String, String> translations = new HashMap<>()
+        Map<String, String> filters = new HashMap<>()
+    }
+
     final String name;
+    String variant;
     String apiKey;
-    String terms;
-    String projectId;
     String type;
-    Map<String, String> translations;
-    Map<String, String> filters;
     String[] tagsNew;
-    
+
+    Map<String, POEditorConfiguration> configurations;
+
     POEditorExtension(){
         this("default");
     }
 
     POEditorExtension(String name){
+        this.configurations = new HashMap<>()
+        this.configurations.put(
+                DEFAULT_VARIANT,
+                new POEditorConfiguration())
         this.name = name;
-        this.translations = new HashMap<>();
-        this.filters = new HashMap<>();
+        this.variant = DEFAULT_VARIANT
     }
-    
+
+    void variant(String variant) {
+        if (!configurations.containsKey(variant)) {
+            configurations.put(variant, new POEditorConfiguration())
+        }
+        this.variant = variant
+    }
+
     void apikey(String apiKey){
         this.apiKey = apiKey
     }
 
     void projectId(String projectId){
-        this.projectId = projectId;
+        configurations.get(variant).projectId = projectId;
     }
 
     void type(String type){
@@ -35,15 +54,15 @@ class POEditorExtension {
     }
 
     void terms(String terms){
-        this.terms = terms;
+        configurations.get(variant).terms = terms;
     }
 
-    void trans(String language, String path){
-        this.translations.put(language, path);
+    void trans(String language, String path) {
+        configurations.get(variant).translations.put(language, path);
     }
-    
+
     void filters(String language, String filters){
-        this.filters.put(language, filters);
+        configurations.get(variant).filters.put(language, filters);
     }
 
     void tagsNew(String[] tagsNew) {
@@ -51,8 +70,15 @@ class POEditorExtension {
     }
 
     public Config toConfig(){
-        Config config = new Config(apiKey, projectId, type, terms, translations, filters, null, tagsNew, null, null);
-        return config;
+        def currentConfig = configurations.get(variant)
+        return new Config(
+                apiKey,
+                currentConfig.projectId,
+                type,
+                currentConfig.terms,
+                currentConfig.translations,
+                currentConfig.filters,
+                null, tagsNew, null, null);
     }
 
     @Override
@@ -60,11 +86,11 @@ class POEditorExtension {
         return "POEditorExtension{" +
                 "name='" + name + '\'' +
                 ", apiKey='" + apiKey + '\'' +
-                ", terms='" + terms + '\'' +
-                ", projectId='" + projectId + '\'' +
+                ", terms='" + configurations.get(variant).terms + '\'' +
+                ", projectId='" + configurations.get(variant).projectId + '\'' +
                 ", type='" + type + '\'' +
-                ", translations=" + translations +
-                ", filters=" + filters +
+                ", translations=" + configurations.get(variant).translations +
+                ", filters=" + configurations.get(variant).filters +
                 ", tagsNew=" + Arrays.toString(tagsNew) +
                 '}';
     }
